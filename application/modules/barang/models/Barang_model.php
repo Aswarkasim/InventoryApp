@@ -48,7 +48,7 @@ class Barang_model extends CI_Model
         return $this->db->get();
     }
 
-    public function listingMinimum()
+    public function listingMinimum($min)
     {
         $query = $this->db->select('tbl_barang.*,
                                     tbl_jenis.nama_jenis,
@@ -56,7 +56,7 @@ class Barang_model extends CI_Model
             ->from('tbl_barang')
             ->join('tbl_jenis', 'tbl_jenis.id_jenis = tbl_barang.id_jenis', 'left')
             ->join('tbl_satuan', 'tbl_satuan.id_satuan = tbl_barang.id_satuan', 'left')
-            ->where('stok', '<=0')
+            ->where('stok<=', $min)
             ->get();
         return $query->result();
     }

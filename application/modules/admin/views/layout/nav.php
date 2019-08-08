@@ -70,7 +70,7 @@ $role = $this->session->userdata('role');
                     <ul class="treeview-menu">
                         <li class="<?php if ($this->uri->segment(2) == "barang") {
                                         echo "active";
-                                    } ?>"><a href="<?= base_url('laporan/barang') ?>" target="blank">Stok Barang</a></li>
+                                    } ?>"><a href="<?= base_url('laporan/barang') ?>" target="blank" target="blank">Stok Barang</a></li>
                         <li class="<?php if ($this->uri->segment(2) == "masuk") {
                                         echo "active";
                                     } ?>"><a href="<?= base_url('laporan/masuk') ?>">Barang Masuk</a></li>
@@ -96,11 +96,11 @@ $role = $this->session->userdata('role');
                     </ul>
                 </li>
 
-                <!-- <li class="<?php // if ($this->uri->segment(2) == "konfigurasi") {
-                                // echo "active";
-                                // } 
-                                ?>"><a href="<?php //echo base_url('admin/konfigurasi') 
-                                                    ?>"><i class="fa fa-cogs"></i> <span>Konfigurasi</span></a></li> -->
+                <li class="<?php if ($this->uri->segment(2) == "konfigurasi") {
+                                echo "active";
+                            }
+                            ?>"><a href="<?php echo base_url('admin/konfigurasi')
+                                                ?>"><i class="fa fa-cogs"></i> <span>Konfigurasi</span></a></li>
 
             <?php } ?>
         </ul>

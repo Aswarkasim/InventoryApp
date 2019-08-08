@@ -1,63 +1,58 @@
-<?php
+<!DOCTYPE html>
+<html lang="en">
 
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>Cetak Laporan Masuk</title>
+    <link rel="stylesheet" href="<?= base_url('assets/admin/') ?>bower_components/bootstrap/dist/css/bootstrap.min.css">
+</head>
 
-$pdf = new TCPDF(PDF_PAGE_ORIENTATION, PDF_UNIT, PDF_PAGE_FORMAT, true, 'UTF-8', false);
-$pdf->setHeaderFont(array(PDF_FONT_NAME_MAIN, '', PDF_FONT_SIZE_MAIN));
-$pdf->setFooterFont(array(PDF_FONT_NAME_DATA, '', PDF_FONT_SIZE_DATA));
-$pdf->SetDefaultMonospacedFont(PDF_FONT_MONOSPACED);
-$pdf->SetMargins(PDF_MARGIN_LEFT, PDF_MARGIN_TOP, PDF_MARGIN_RIGHT);
-// $pdf->SetHeaderMargin(PDF_MARGIN_HEADER);
-// $pdf->SetFooterMargin(PDF_MARGIN_FOOTER);
-$pdf->SetAutoPageBreak(TRUE, PDF_MARGIN_BOTTOM);
-$pdf->setImageScale(PDF_IMAGE_SCALE_RATIO);
-if (@file_exists(dirname(__FILE__) . '/lang/eng.php')) {
-    require_once(dirname(__FILE__) . '/lang/eng.php');
-    $pdf->setLanguageArray($l);
-}
-$pdf->SetFont('times', '', 10);
-$pdf->AddPage();
-$html = '<h2 align="center">LAPORAN STOK BARANG</h2><hr>
-<table border="1" width="760" cellpadding="5">
+<body>
+    <div class="container">
+        <h2 align="center">LAPORAN BARANG KELUAR</h2>
+        <hr>
+        <table border="1" width="100%" class="table">
             <thead>
-                <tr align="center">
+                <tr align="center" cellpadding="200">
                     <th width="30"><b>NO</b></th>
                     <th><b>ID BARANG</b></th>
                     <th><b>TANGGAL TRANSAKSI</b></th>
                     <th><b>NAMA BARANG</b></th>
                     <th><b>JUMLAH BARANG</b></th>
                 </tr>
-            </thead>';
-$no = 1;
-foreach ($keluar as $row) {
-    $html .= '
-    <tbody>
-        <tr align="center">
-            <td width="30">' . $no . '</td>
-            <td>' . $row->id_barang . '</td>
-            <td>' . $row->tanggal . '</td>
-            <td>' . $row->nama_barang . '</td>
-            <td>' . $row->jumlah . ' ' . $row->nama_satuan . '</td>
-        </tr>
-    </tbody>
-    ';
-    $no++;
-}
-$html .= '</table><br><br><br><br><br><br>
-<table align="left">
-    <tr>
-        <td>Makassar, ' . $tanggal . '</td>
-    </tr>
-    <tr>
-        <td>Pimpinan Perusahaan</td>
-    </tr>
-    <tr><td></td></tr>
-    <tr><td></td></tr>
-    <tr><td></td></tr>
-    <tr>
-        <td>Nama Anda</td>
-    </tr>
-</table>
-';
-$pdf->writeHTML($html, true, false, true, false, '');
-$pdf->lastPage();
-$pdf->Output('example_006.pdf', 'I');
+            </thead>
+
+            <tbody>
+                <?php
+                $no = 1;
+                foreach ($keluar as $row) {
+                    ?>
+                    <tr>
+                        <td width="30"><?= $no ?></td>
+                        <td><?= $row->id_barang ?></td>
+                        <td><?= $row->tanggal ?></td>
+                        <td><?= $row->nama_barang ?></td>
+                        <td><?= $row->jumlah  . ' ' . $row->nama_satuan  ?></td>
+                    </tr>
+                    <?php $no++;
+                } ?>
+            </tbody>
+        </table><br><br><br><br><br><br>
+
+        <div class="row">
+            <div class="pull-right">
+                Makassar, <?= $tanggal ?><br>
+                Pimpinan Perusahaan
+                <br><br><br><br><br>
+                <?= $konfigurasi->nama_pimpinan ?>
+            </div>
+        </div>
+    </div>
+
+    <script>
+        window.print();
+    </script>
+</body>
+
+</html>

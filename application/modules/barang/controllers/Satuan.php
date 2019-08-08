@@ -19,6 +19,7 @@ class Satuan extends CI_Controller
     {
         $satuan = $this->Crud_model->listing('tbl_satuan');
         $data = [
+            'satuan'    => 'Satuan Barang',
             'back'      => 'barang/satuan',
             'satuan'    => $satuan,
             'content'   => 'barang/satuan/index'

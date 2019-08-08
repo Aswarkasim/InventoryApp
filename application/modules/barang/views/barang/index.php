@@ -72,8 +72,8 @@
                             <td><?= $row->id_barang ?></td>
                             <td><?= $row->nama_barang ?></td>
                             <td><?= $row->nama_jenis ?></td>
-                            <td><?= $row->nama_satuan ?></td>
                             <td><?= $row->stok ?></td>
+                            <td><?= $row->nama_satuan ?></td>
                             <?php if ($this->session->userdata('role') == "Admin") { ?>
                                 <td>
                                     <div class="btn-group">

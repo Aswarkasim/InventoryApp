@@ -16,8 +16,11 @@ class Laporan extends CI_Controller
 
 
         $barang = $this->Laporan_model->list_barang();
+        $konfigurasi = $this->Crud_model->listingOne('tbl_konfigurasi', 'id_konfigurasi', '1');
         $data = array(
             'title'     => 'Cetak laporan barang',
+            'tanggal'   => date('d M Y'),
+            'konfigurasi' => $konfigurasi,
             'barang'    => $barang
         );
         $this->load->view('laporan/barang', $data, FALSE);
@@ -36,10 +39,12 @@ class Laporan extends CI_Controller
     {
         $awal = $this->input->post('awal');
         $akhir = $this->input->post('akhir');
+        $konfigurasi = $this->Crud_model->listingOne('tbl_konfigurasi', 'id_konfigurasi', '1');
         $masuk = $this->Laporan_model->list_masuk_tgl($awal, $akhir);
         $data = array(
             'title'     => 'Cetak laporan barang',
             'tanggal'   => date('d M Y'),
+            'konfigurasi' => $konfigurasi,
             'masuk'    => $masuk
         );
         $this->load->view('laporan/masuk_cetak', $data, FALSE);
@@ -58,10 +63,12 @@ class Laporan extends CI_Controller
     {
         $awal = $this->input->post('awal');
         $akhir = $this->input->post('akhir');
+        $konfigurasi = $this->Crud_model->listingOne('tbl_konfigurasi', 'id_konfigurasi', '1');
         $keluar = $this->Laporan_model->list_keluar_tgl($awal, $akhir);
         $data = array(
             'title'     => 'Cetak laporan barang',
             'tanggal'   => date('d M Y'),
+            'konfigurasi' => $konfigurasi,
             'keluar'    => $keluar
         );
         $this->load->view('laporan/keluar_cetak', $data, FALSE);

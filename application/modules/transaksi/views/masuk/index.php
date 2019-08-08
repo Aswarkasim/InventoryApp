@@ -16,6 +16,7 @@
                     <th>ID BARANG</th>
                     <th>NAMA BARANG</th>
                     <th>JUMLAH MASUK</th>
+                    <th>SATUAN</th>
                     <th>AKSI</th>
                 </tr>
             </thead>
@@ -28,7 +29,8 @@
                         <td><?= $row->tanggal ?></td>
                         <td><?= $row->id_barang ?></td>
                         <td><?= $row->nama_barang ?></td>
-                        <td><?= $row->jumlah . ' ' . $row->nama_satuan ?></td>
+                        <td><?= $row->jumlah ?></td>
+                        <td><?= $row->nama_satuan ?></td>
                         <td>
                             <div class="btn-group">
                                 <button type="button" class="btn btn-success"><i class="fa fa-cogs"></i></button>

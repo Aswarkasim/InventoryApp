@@ -24,7 +24,8 @@ class Dashboard extends CI_Controller
         $masuk = $this->Crud_model->listing('tbl_masuk');
         $keluar = $this->Crud_model->listing('tbl_keluar');
         $userAll = $this->Crud_model->listing('tbl_user');
-        $min_barang = $this->Barang_model->listingMinimum();
+        $konfigurasi = $this->Crud_model->listingOne('tbl_konfigurasi', 'id_konfigurasi', '1');
+        $min_barang = $this->Barang_model->listingMinimum($konfigurasi->stok_min);
         $data = [
             'title'     => 'Dashboard',
             'user'      => $user,
@@ -33,10 +34,22 @@ class Dashboard extends CI_Controller
             'keluar'      => $keluar,
             'min_barang'      => $min_barang,
             'userAll'      => $userAll,
+            'konfigurasi'      => $konfigurasi,
             'content'   => 'admin/dashboard/index'
         ];
 
         $this->load->view('admin/layout/wrapper', $data, FALSE);
+    }
+
+    function edit_min()
+    {
+        $i = $this->input;
+        $data = [
+            'stok_min'   => $i->post('stok_min'),
+        ];
+        $this->Crud_model->edit('tbl_konfigurasi', 'id_konfigurasi', '1', $data);
+        $this->session->set_flashdata('msg', 'Stok minimum diubah');
+        redirect('admin/dashboard');
     }
 }
 
